@@ -1,0 +1,128 @@
+{
+  "name": "reconciliation-cycle",
+  "description": "standard cycle with compacted adjustments",
+  "epoch": 5012,
+  "book": "df-main",
+  "assets": [
+    {
+      "id": "USD",
+      "symbol": "USD",
+      "name": "DeltaForge Settlement Dollar",
+      "scale": 1000000,
+      "precision": 6,
+      "dustLimit": 5,
+      "microTolerance": 12,
+      "globalTolerance": 5000,
+      "settlementFloor": 0,
+      "liquidationHaircutBps": 0,
+      "globalEnabled": true
+    },
+    {
+      "id": "EUR",
+      "symbol": "EUR",
+      "name": "Euro Cash Lane",
+      "scale": 1000000,
+      "precision": 6,
+      "dustLimit": 5,
+      "microTolerance": 10,
+      "globalTolerance": 4000,
+      "settlementFloor": 0,
+      "liquidationHaircutBps": 0,
+      "globalEnabled": true
+    }
+  ],
+  "policy": {
+    "microTolerance": 12,
+    "globalTolerance": 5000,
+    "correctionThreshold": 13,
+    "maxCorrection": 50000,
+    "minSettlementWeight": 1,
+    "maxGlobalReceivers": 8,
+    "settlementFloor": 0,
+    "weightingMode": "turnover",
+    "allowNegativeFinal": false,
+    "includeInactive": false,
+    "eventLevel": "summary",
+    "requireBalancedTotals": true,
+    "assetOverrides": [
+      { "asset": "USD", "microTolerance": 12, "globalTolerance": 5000, "settlementFloor": 0, "receiverCap": 0, "liquidationHaircutBps": 0, "enabled": true },
+      { "asset": "EUR", "microTolerance": 10, "globalTolerance": 4000, "settlementFloor": 0, "receiverCap": 0, "liquidationHaircutBps": 0, "enabled": true }
+    ]
+  },
+  "labels": {
+    "desk": "cash-recon",
+    "mode": "standard"
+  },
+  "accounts": [
+    {
+      "id": "member-alpha",
+      "owner": "Alpha Markets",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 1000000, "EUR": 220000 },
+      "executed": { "USD": 999992, "EUR": 220000 },
+      "turnover": { "USD": 20000000, "EUR": 1250000 },
+      "locked": {},
+      "settlementWeight": 3,
+      "liquidityTier": 2,
+      "riskTier": 1
+    },
+    {
+      "id": "member-beta",
+      "owner": "Beta Clearing",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 700000, "EUR": 100000 },
+      "executed": { "USD": 699993, "EUR": 100000 },
+      "turnover": { "USD": 18000000, "EUR": 950000 },
+      "locked": {},
+      "settlementWeight": 2,
+      "liquidityTier": 1,
+      "riskTier": 1
+    },
+    {
+      "id": "liquidity-core",
+      "owner": "Core Liquidity",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 2500000, "EUR": 600000 },
+      "executed": { "USD": 2500000, "EUR": 600000 },
+      "turnover": { "USD": 90000000, "EUR": 7000000 },
+      "locked": {},
+      "settlementWeight": 9,
+      "liquidityTier": 4,
+      "riskTier": 1
+    },
+    {
+      "id": "retail-omega",
+      "owner": "Omega Retail",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 300000, "EUR": 40000 },
+      "executed": { "USD": 300000, "EUR": 39996 },
+      "turnover": { "USD": 600000, "EUR": 120000 },
+      "locked": {},
+      "settlementWeight": 1,
+      "liquidityTier": 1,
+      "riskTier": 2
+    },
+    {
+      "id": "treasury",
+      "owner": "DeltaForge Treasury",
+      "kind": "treasury",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 500000, "EUR": 250000 },
+      "executed": { "USD": 500000, "EUR": 250000 },
+      "turnover": { "USD": 0, "EUR": 0 },
+      "locked": {},
+      "settlementWeight": 1,
+      "liquidityTier": 1,
+      "riskTier": 1
+    }
+  ]
+}

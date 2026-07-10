@@ -1,0 +1,86 @@
+{
+  "name": "correction-cycle",
+  "description": "cycle with a material correction",
+  "epoch": 5013,
+  "book": "df-correction",
+  "assets": [
+    {
+      "id": "USD",
+      "symbol": "USD",
+      "name": "DeltaForge Settlement Dollar",
+      "scale": 1000000,
+      "precision": 6,
+      "dustLimit": 5,
+      "microTolerance": 12,
+      "globalTolerance": 5000,
+      "settlementFloor": 0,
+      "liquidationHaircutBps": 0,
+      "globalEnabled": true
+    }
+  ],
+  "policy": {
+    "microTolerance": 12,
+    "globalTolerance": 5000,
+    "correctionThreshold": 13,
+    "maxCorrection": 75000,
+    "minSettlementWeight": 1,
+    "maxGlobalReceivers": 8,
+    "settlementFloor": 0,
+    "weightingMode": "turnover",
+    "allowNegativeFinal": false,
+    "includeInactive": false,
+    "eventLevel": "summary",
+    "requireBalancedTotals": true,
+    "assetOverrides": [
+      { "asset": "USD", "microTolerance": 12, "globalTolerance": 5000, "settlementFloor": 0, "receiverCap": 0, "liquidationHaircutBps": 0, "enabled": true }
+    ]
+  },
+  "labels": {
+    "desk": "cash-recon",
+    "mode": "correction"
+  },
+  "accounts": [
+    {
+      "id": "member-alpha",
+      "owner": "Alpha Markets",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 1400000 },
+      "executed": { "USD": 1399180 },
+      "turnover": { "USD": 22000000 },
+      "locked": {},
+      "settlementWeight": 4,
+      "liquidityTier": 2,
+      "riskTier": 1
+    },
+    {
+      "id": "member-beta",
+      "owner": "Beta Clearing",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 900000 },
+      "executed": { "USD": 899990 },
+      "turnover": { "USD": 18500000 },
+      "locked": {},
+      "settlementWeight": 2,
+      "liquidityTier": 1,
+      "riskTier": 1
+    },
+    {
+      "id": "liquidity-core",
+      "owner": "Core Liquidity",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "primary",
+      "expected": { "USD": 1800000 },
+      "executed": { "USD": 1800000 },
+      "turnover": { "USD": 70000000 },
+      "locked": {},
+      "settlementWeight": 8,
+      "liquidityTier": 4,
+      "riskTier": 1
+    }
+  ]
+}

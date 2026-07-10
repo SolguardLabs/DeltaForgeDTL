@@ -1,0 +1,100 @@
+{
+  "name": "snapshot-cycle",
+  "description": "two-lane cycle used by snapshot tests",
+  "epoch": 5011,
+  "book": "df-snapshot",
+  "assets": [
+    {
+      "id": "USD",
+      "symbol": "USD",
+      "name": "DeltaForge Settlement Dollar",
+      "scale": 1000000,
+      "precision": 6,
+      "dustLimit": 5,
+      "microTolerance": 12,
+      "globalTolerance": 5000,
+      "settlementFloor": 0,
+      "liquidationHaircutBps": 0,
+      "globalEnabled": true
+    },
+    {
+      "id": "EUR",
+      "symbol": "EUR",
+      "name": "Euro Cash Lane",
+      "scale": 1000000,
+      "precision": 6,
+      "dustLimit": 5,
+      "microTolerance": 10,
+      "globalTolerance": 4000,
+      "settlementFloor": 0,
+      "liquidationHaircutBps": 0,
+      "globalEnabled": true
+    }
+  ],
+  "policy": {
+    "microTolerance": 12,
+    "globalTolerance": 5000,
+    "correctionThreshold": 13,
+    "maxCorrection": 50000,
+    "minSettlementWeight": 1,
+    "maxGlobalReceivers": 8,
+    "settlementFloor": 0,
+    "weightingMode": "risk-adjusted",
+    "allowNegativeFinal": false,
+    "includeInactive": false,
+    "eventLevel": "summary",
+    "requireBalancedTotals": true,
+    "assetOverrides": [
+      { "asset": "USD", "microTolerance": 12, "globalTolerance": 5000, "settlementFloor": 0, "receiverCap": 0, "liquidationHaircutBps": 0, "enabled": true },
+      { "asset": "EUR", "microTolerance": 10, "globalTolerance": 4000, "settlementFloor": 0, "receiverCap": 0, "liquidationHaircutBps": 0, "enabled": true }
+    ]
+  },
+  "labels": {
+    "desk": "snapshot",
+    "mode": "stable"
+  },
+  "accounts": [
+    {
+      "id": "member-alpha",
+      "owner": "Alpha Markets",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "cross",
+      "expected": { "USD": 1100000, "EUR": 900000 },
+      "executed": { "USD": 1099994, "EUR": 900000 },
+      "turnover": { "USD": 9000000, "EUR": 5000000 },
+      "locked": {},
+      "settlementWeight": 3,
+      "liquidityTier": 2,
+      "riskTier": 1
+    },
+    {
+      "id": "member-beta",
+      "owner": "Beta Clearing",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "cross",
+      "expected": { "USD": 400000, "EUR": 450000 },
+      "executed": { "USD": 400000, "EUR": 449992 },
+      "turnover": { "USD": 4000000, "EUR": 3500000 },
+      "locked": {},
+      "settlementWeight": 2,
+      "liquidityTier": 2,
+      "riskTier": 2
+    },
+    {
+      "id": "member-gamma",
+      "owner": "Gamma Flow",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "cross",
+      "expected": { "USD": 750000, "EUR": 250000 },
+      "executed": { "USD": 750000, "EUR": 250000 },
+      "turnover": { "USD": 12000000, "EUR": 2500000 },
+      "locked": {},
+      "settlementWeight": 5,
+      "liquidityTier": 3,
+      "riskTier": 1
+    }
+  ]
+}

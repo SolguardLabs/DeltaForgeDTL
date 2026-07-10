@@ -1,0 +1,6 @@
+{
+  "go.toolsManagement.autoUpdate": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.trimTrailingWhitespace": true,
+  "editor.formatOnSave": true
+}

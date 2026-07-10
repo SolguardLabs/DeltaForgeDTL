@@ -1,0 +1,72 @@
+{
+  "name": "settlement-cycle",
+  "description": "cycle that exercises final floor settlement",
+  "epoch": 5014,
+  "book": "df-floor",
+  "assets": [
+    {
+      "id": "USD",
+      "symbol": "USD",
+      "name": "DeltaForge Settlement Dollar",
+      "scale": 1000000,
+      "precision": 6,
+      "dustLimit": 5,
+      "microTolerance": 12,
+      "globalTolerance": 5000,
+      "settlementFloor": 100,
+      "liquidationHaircutBps": 0,
+      "globalEnabled": true
+    }
+  ],
+  "policy": {
+    "microTolerance": 12,
+    "globalTolerance": 5000,
+    "correctionThreshold": 13,
+    "maxCorrection": 50000,
+    "minSettlementWeight": 1,
+    "maxGlobalReceivers": 8,
+    "settlementFloor": 100,
+    "weightingMode": "turnover",
+    "allowNegativeFinal": false,
+    "includeInactive": false,
+    "eventLevel": "summary",
+    "requireBalancedTotals": true,
+    "assetOverrides": [
+      { "asset": "USD", "microTolerance": 12, "globalTolerance": 5000, "settlementFloor": 100, "receiverCap": 0, "liquidationHaircutBps": 0, "enabled": true }
+    ]
+  },
+  "labels": {
+    "desk": "floor-recon",
+    "mode": "settlement"
+  },
+  "accounts": [
+    {
+      "id": "member-floor",
+      "owner": "Floor Member",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "floor",
+      "expected": { "USD": 95 },
+      "executed": { "USD": 90 },
+      "turnover": { "USD": 1000 },
+      "locked": {},
+      "settlementWeight": 1,
+      "liquidityTier": 1,
+      "riskTier": 2
+    },
+    {
+      "id": "member-router",
+      "owner": "Router Member",
+      "kind": "member",
+      "status": "active",
+      "adjustmentGroup": "floor",
+      "expected": { "USD": 10000 },
+      "executed": { "USD": 10000 },
+      "turnover": { "USD": 15000000 },
+      "locked": {},
+      "settlementWeight": 6,
+      "liquidityTier": 3,
+      "riskTier": 1
+    }
+  ]
+}

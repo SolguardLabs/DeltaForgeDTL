@@ -1,0 +1,19 @@
+{
+  "name": "deltaforgedtl",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Go DTL reconciliation engine with TypeScript integration tests.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test \"tests/node/*.test.ts\"",
+    "ci": "node scripts/build.mjs && node --test \"tests/node/*.test.ts\" && node scripts/check-loc.mjs",
+    "loc": "node scripts/check-loc.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.3"
+  }
+}
