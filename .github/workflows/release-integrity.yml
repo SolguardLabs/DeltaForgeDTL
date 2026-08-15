@@ -1,0 +1,36 @@
+name: Release integrity
+
+on:
+  push:
+    branches: [main, production]
+    tags: ["v*"]
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-ref:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout observed revision
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Fetch release references
+        run: git fetch origin main production --tags --force
+      - name: Verify immutable promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          main_sha="$(git rev-parse origin/main)"
+          production_sha="$(git rev-parse origin/production)"
+          test "$main_sha" = "$production_sha"
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            test "$(git rev-parse "${GITHUB_REF_NAME}^{commit}")" = "$main_sha"
+          fi
+          if [[ "${GITHUB_EVENT_NAME}" == "release" ]]; then
+            tag="${{ github.event.release.tag_name }}"
+            test "$(git rev-parse "${tag}^{commit}")" = "$main_sha"
+          fi

@@ -271,14 +271,14 @@ type Difference struct {
 }
 
 type GlobalPool struct {
-	Asset          string `json:"asset"`
-	Group          string `json:"group"`
-	Amount         Amount `json:"amount"`
-	AbsAmount      Amount `json:"absAmount"`
-	Entries        int    `json:"entries"`
-	PositiveEntries int   `json:"positiveEntries"`
-	NegativeEntries int   `json:"negativeEntries"`
-	MaxSingleDrift Amount `json:"maxSingleDrift"`
+	Asset           string `json:"asset"`
+	Group           string `json:"group"`
+	Amount          Amount `json:"amount"`
+	AbsAmount       Amount `json:"absAmount"`
+	Entries         int    `json:"entries"`
+	PositiveEntries int    `json:"positiveEntries"`
+	NegativeEntries int    `json:"negativeEntries"`
+	MaxSingleDrift  Amount `json:"maxSingleDrift"`
 }
 
 func (p GlobalPool) Key() string {
@@ -295,42 +295,42 @@ const (
 )
 
 type Correction struct {
-	ID        string           `json:"id"`
-	Account   string           `json:"account"`
-	Asset     string           `json:"asset"`
-	Amount    Amount           `json:"amount"`
-	Before    Amount           `json:"before"`
-	After     Amount           `json:"after"`
-	Reason    string           `json:"reason"`
-	Status    CorrectionStatus `json:"status"`
-	Epoch     int64            `json:"epoch"`
-	Trace     string           `json:"trace"`
+	ID      string           `json:"id"`
+	Account string           `json:"account"`
+	Asset   string           `json:"asset"`
+	Amount  Amount           `json:"amount"`
+	Before  Amount           `json:"before"`
+	After   Amount           `json:"after"`
+	Reason  string           `json:"reason"`
+	Status  CorrectionStatus `json:"status"`
+	Epoch   int64            `json:"epoch"`
+	Trace   string           `json:"trace"`
 }
 
 type Allocation struct {
-	ID        string `json:"id"`
-	Account   string `json:"account"`
-	Asset     string `json:"asset"`
-	Group     string `json:"group"`
-	Amount    Amount `json:"amount"`
-	Weight    int64  `json:"weight"`
-	Before    Amount `json:"before"`
-	After     Amount `json:"after"`
-	Pool      string `json:"pool"`
-	Sequence  int    `json:"sequence"`
+	ID       string `json:"id"`
+	Account  string `json:"account"`
+	Asset    string `json:"asset"`
+	Group    string `json:"group"`
+	Amount   Amount `json:"amount"`
+	Weight   int64  `json:"weight"`
+	Before   Amount `json:"before"`
+	After    Amount `json:"after"`
+	Pool     string `json:"pool"`
+	Sequence int    `json:"sequence"`
 }
 
 type Liquidation struct {
-	ID             string `json:"id"`
-	Account        string `json:"account"`
-	Asset          string `json:"asset"`
-	Starting       Amount `json:"starting"`
-	Settled         Amount `json:"settled"`
-	Haircut         Amount `json:"haircut"`
-	Final          Amount `json:"final"`
-	Reason         string `json:"reason"`
-	HaircutBps     int64  `json:"haircutBps"`
-	Sequence       int    `json:"sequence"`
+	ID         string `json:"id"`
+	Account    string `json:"account"`
+	Asset      string `json:"asset"`
+	Starting   Amount `json:"starting"`
+	Settled    Amount `json:"settled"`
+	Haircut    Amount `json:"haircut"`
+	Final      Amount `json:"final"`
+	Reason     string `json:"reason"`
+	HaircutBps int64  `json:"haircutBps"`
+	Sequence   int    `json:"sequence"`
 }
 
 type Event struct {
@@ -382,63 +382,63 @@ type AssetReport struct {
 }
 
 type SnapshotReport struct {
-	Epoch             int64             `json:"epoch"`
-	Book              string            `json:"book"`
-	AccountCount      int               `json:"accountCount"`
-	AssetCount        int               `json:"assetCount"`
-	ExpectedTotals    map[string]Amount `json:"expectedTotals"`
-	ExecutedTotals    map[string]Amount `json:"executedTotals"`
-	FinalTotals       map[string]Amount `json:"finalTotals"`
-	LockedTotals      map[string]Amount `json:"lockedTotals"`
-	Hash              string            `json:"hash"`
-	CanonicalLineCount int              `json:"canonicalLineCount"`
+	Epoch              int64             `json:"epoch"`
+	Book               string            `json:"book"`
+	AccountCount       int               `json:"accountCount"`
+	AssetCount         int               `json:"assetCount"`
+	ExpectedTotals     map[string]Amount `json:"expectedTotals"`
+	ExecutedTotals     map[string]Amount `json:"executedTotals"`
+	FinalTotals        map[string]Amount `json:"finalTotals"`
+	LockedTotals       map[string]Amount `json:"lockedTotals"`
+	Hash               string            `json:"hash"`
+	CanonicalLineCount int               `json:"canonicalLineCount"`
 }
 
 type ReconciliationReport struct {
-	Differences       []Difference `json:"differences"`
-	GlobalPools       []GlobalPool `json:"globalPools"`
-	MicroTotal        Amount       `json:"microTotal"`
-	CorrectionTotal   Amount       `json:"correctionTotal"`
-	ExactCount        int          `json:"exactCount"`
-	MicroCount        int          `json:"microCount"`
-	CorrectionCount   int          `json:"correctionCount"`
-	BlockedCount      int          `json:"blockedCount"`
-	BalancedByAsset    []AssetBalance `json:"balancedByAsset"`
+	Differences     []Difference   `json:"differences"`
+	GlobalPools     []GlobalPool   `json:"globalPools"`
+	MicroTotal      Amount         `json:"microTotal"`
+	CorrectionTotal Amount         `json:"correctionTotal"`
+	ExactCount      int            `json:"exactCount"`
+	MicroCount      int            `json:"microCount"`
+	CorrectionCount int            `json:"correctionCount"`
+	BlockedCount    int            `json:"blockedCount"`
+	BalancedByAsset []AssetBalance `json:"balancedByAsset"`
 }
 
 type AssetBalance struct {
-	Asset          string `json:"asset"`
-	ExpectedTotal  Amount `json:"expectedTotal"`
-	ExecutedTotal  Amount `json:"executedTotal"`
-	FinalTotal     Amount `json:"finalTotal"`
-	ObservedDrift  Amount `json:"observedDrift"`
-	SettledDrift   Amount `json:"settledDrift"`
-	Balanced       bool   `json:"balanced"`
+	Asset         string `json:"asset"`
+	ExpectedTotal Amount `json:"expectedTotal"`
+	ExecutedTotal Amount `json:"executedTotal"`
+	FinalTotal    Amount `json:"finalTotal"`
+	ObservedDrift Amount `json:"observedDrift"`
+	SettledDrift  Amount `json:"settledDrift"`
+	Balanced      bool   `json:"balanced"`
 }
 
 type SettlementReport struct {
-	Allocations        []Allocation  `json:"allocations"`
-	Liquidations       []Liquidation `json:"liquidations"`
-	AllocationTotal    Amount        `json:"allocationTotal"`
-	LiquidationTotal   Amount        `json:"liquidationTotal"`
-	ReceiverCount      int           `json:"receiverCount"`
-	PoolCount          int           `json:"poolCount"`
-	RoundingRemainder  Amount        `json:"roundingRemainder"`
-	Completed          bool          `json:"completed"`
+	Allocations       []Allocation  `json:"allocations"`
+	Liquidations      []Liquidation `json:"liquidations"`
+	AllocationTotal   Amount        `json:"allocationTotal"`
+	LiquidationTotal  Amount        `json:"liquidationTotal"`
+	ReceiverCount     int           `json:"receiverCount"`
+	PoolCount         int           `json:"poolCount"`
+	RoundingRemainder Amount        `json:"roundingRemainder"`
+	Completed         bool          `json:"completed"`
 }
 
 type Metrics struct {
-	TotalExpected       map[string]Amount `json:"totalExpected"`
-	TotalExecuted       map[string]Amount `json:"totalExecuted"`
-	TotalFinal          map[string]Amount `json:"totalFinal"`
-	NetDrift            map[string]Amount `json:"netDrift"`
-	CorrectionVolume    Amount            `json:"correctionVolume"`
-	GlobalVolume        Amount            `json:"globalVolume"`
-	LiquidationVolume   Amount            `json:"liquidationVolume"`
-	MaxAccountDrift     Amount            `json:"maxAccountDrift"`
-	RiskWeightedDrift   Amount            `json:"riskWeightedDrift"`
-	ReceiverHerfindahl  int64             `json:"receiverHerfindahl"`
-	AccountsTouched     int               `json:"accountsTouched"`
+	TotalExpected      map[string]Amount `json:"totalExpected"`
+	TotalExecuted      map[string]Amount `json:"totalExecuted"`
+	TotalFinal         map[string]Amount `json:"totalFinal"`
+	NetDrift           map[string]Amount `json:"netDrift"`
+	CorrectionVolume   Amount            `json:"correctionVolume"`
+	GlobalVolume       Amount            `json:"globalVolume"`
+	LiquidationVolume  Amount            `json:"liquidationVolume"`
+	MaxAccountDrift    Amount            `json:"maxAccountDrift"`
+	RiskWeightedDrift  Amount            `json:"riskWeightedDrift"`
+	ReceiverHerfindahl int64             `json:"receiverHerfindahl"`
+	AccountsTouched    int               `json:"accountsTouched"`
 }
 
 type Report struct {

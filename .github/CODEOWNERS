@@ -1,0 +1,5 @@
+* @SolguardLabs/protocol-engineering
+/src/ @SolguardLabs/protocol-engineering @SolguardLabs/security
+/sdk/ @SolguardLabs/protocol-engineering
+/.github/ @SolguardLabs/platform-engineering @SolguardLabs/security
+/SECURITY.md @SolguardLabs/security

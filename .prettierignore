@@ -1,4 +1,7 @@
 out/
 node_modules/
 coverage/
-vulnerability.md
+docs/
+README.md
+SECURITY.md
+package-lock.json

@@ -34,28 +34,28 @@ type ExposureLine struct {
 }
 
 type DriftBucket struct {
-	Asset       string   `json:"asset"`
-	Group       string   `json:"group"`
-	Count       int      `json:"count"`
-	Net         Amount   `json:"net"`
-	Abs         Amount   `json:"abs"`
-	Largest     Amount   `json:"largest"`
-	Accounts    []string `json:"accounts"`
-	Positive    int      `json:"positive"`
-	Negative    int      `json:"negative"`
-	Zero        int      `json:"zero"`
-	AverageAbs  Amount   `json:"averageAbs"`
+	Asset      string   `json:"asset"`
+	Group      string   `json:"group"`
+	Count      int      `json:"count"`
+	Net        Amount   `json:"net"`
+	Abs        Amount   `json:"abs"`
+	Largest    Amount   `json:"largest"`
+	Accounts   []string `json:"accounts"`
+	Positive   int      `json:"positive"`
+	Negative   int      `json:"negative"`
+	Zero       int      `json:"zero"`
+	AverageAbs Amount   `json:"averageAbs"`
 }
 
 type AuditProfile struct {
-	Name             string           `json:"name"`
-	Epoch            int64            `json:"epoch"`
-	Checks           []InvariantCheck `json:"checks"`
-	Exposures        []ExposureLine   `json:"exposures"`
-	Buckets          []DriftBucket    `json:"buckets"`
-	Passed           bool             `json:"passed"`
-	FailedCount      int              `json:"failedCount"`
-	ReviewCount      int              `json:"reviewCount"`
+	Name              string           `json:"name"`
+	Epoch             int64            `json:"epoch"`
+	Checks            []InvariantCheck `json:"checks"`
+	Exposures         []ExposureLine   `json:"exposures"`
+	Buckets           []DriftBucket    `json:"buckets"`
+	Passed            bool             `json:"passed"`
+	FailedCount       int              `json:"failedCount"`
+	ReviewCount       int              `json:"reviewCount"`
 	MaxExposure       Amount           `json:"maxExposure"`
 	MaxSettlementMove Amount           `json:"maxSettlementMove"`
 }
@@ -77,15 +77,15 @@ func BuildAuditProfile(ledger *Ledger, reconciliation ReconciliationReport, sett
 		maxMove = maxAmount(maxMove, absAmount(exposure.SettlementDelta))
 	}
 	return AuditProfile{
-		Name:             ledger.Name,
-		Epoch:            ledger.Epoch,
-		Checks:           checks,
-		Exposures:        exposures,
-		Buckets:          buckets,
-		Passed:           failed == 0,
-		FailedCount:      failed,
-		ReviewCount:      len(checks),
-		MaxExposure:      maxExposure,
+		Name:              ledger.Name,
+		Epoch:             ledger.Epoch,
+		Checks:            checks,
+		Exposures:         exposures,
+		Buckets:           buckets,
+		Passed:            failed == 0,
+		FailedCount:       failed,
+		ReviewCount:       len(checks),
+		MaxExposure:       maxExposure,
 		MaxSettlementMove: maxMove,
 	}
 }
@@ -125,7 +125,7 @@ func checkAssetTotals(ledger *Ledger) []InvariantCheck {
 			ID:       "asset-drift-materialized-" + asset,
 			Scope:    "asset",
 			Asset:    asset,
-			Passed:   (expected[asset]-executed[asset]) == (final[asset]-executed[asset]),
+			Passed:   (expected[asset] - executed[asset]) == (final[asset] - executed[asset]),
 			Expected: expected[asset] - executed[asset],
 			Actual:   final[asset] - executed[asset],
 			Message:  "asset drift is reflected in final totals",
