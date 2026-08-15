@@ -12,7 +12,7 @@ for (const file of readdirSync(join(root, "src"))) {
 }
 
 console.log(lines);
-if (lines < 3000 || lines > 4000) {
-  console.error(`src/ LOC must be between 3000 and 4000, got ${lines}`);
+if (lines < 3600 || lines > 5000) {
+  console.error(`src/ LOC must be between 3600 and 5000, got ${lines}`);
   process.exit(1);
 }

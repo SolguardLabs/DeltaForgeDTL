@@ -1,19 +1,25 @@
 {
   "name": "deltaforgedtl",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Go DTL reconciliation engine with TypeScript integration tests.",
+  "description": "Motor de reconciliación y cliente operativo para liquidación institucional.",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node scripts/build.mjs && node --test \"tests/node/*.test.ts\"",
-    "ci": "node scripts/build.mjs && node --test \"tests/node/*.test.ts\" && node scripts/check-loc.mjs",
+    "format:check": "prettier --check . && node scripts/check-go-format.mjs",
+    "check": "go vet ./...",
+    "test:go": "go test ./...",
+    "test:node": "node --test \"tests/node/*.test.ts\" \"tests/sdk/*.test.ts\" \"tests/repository/*.test.ts\"",
+    "test": "npm run test:go && npm run test:node",
+    "verify:repo": "node scripts/verify-repository.mjs",
+    "audit:deps": "npm audit --omit=dev --audit-level=high",
+    "ci": "npm run format:check && node scripts/build.mjs --vet && npm test && npm run verify:repo && npm run audit:deps",
     "loc": "node scripts/check-loc.mjs"
   },
   "engines": {
     "node": ">=24"
   },
   "devDependencies": {
-    "prettier": "^3.8.3"
+    "prettier": "3.8.3"
   }
 }

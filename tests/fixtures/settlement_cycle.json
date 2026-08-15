@@ -32,7 +32,15 @@
     "eventLevel": "summary",
     "requireBalancedTotals": true,
     "assetOverrides": [
-      { "asset": "USD", "microTolerance": 12, "globalTolerance": 5000, "settlementFloor": 100, "receiverCap": 0, "liquidationHaircutBps": 0, "enabled": true }
+      {
+        "asset": "USD",
+        "microTolerance": 12,
+        "globalTolerance": 5000,
+        "settlementFloor": 100,
+        "receiverCap": 0,
+        "liquidationHaircutBps": 0,
+        "enabled": true
+      }
     ]
   },
   "labels": {

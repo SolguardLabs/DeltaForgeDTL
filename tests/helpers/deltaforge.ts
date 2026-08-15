@@ -162,7 +162,11 @@ export type DeltaForgeReport = {
 };
 
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
-export const binary = join(root, "out", process.platform === "win32" ? "deltaforgedtl.exe" : "deltaforgedtl");
+export const binary = join(
+  root,
+  "out",
+  process.platform === "win32" ? "deltaforgedtl.exe" : "deltaforgedtl",
+);
 
 export function ensureBuilt(): void {
   if (existsSync(binary)) {
@@ -184,13 +188,17 @@ export function runCli(args: string[]): string {
     encoding: "utf8",
   });
   if (result.status !== 0) {
-    throw new Error(`command failed: ${binary} ${args.join(" ")}\n${result.stderr || result.stdout}`);
+    throw new Error(
+      `command failed: ${binary} ${args.join(" ")}\n${result.stderr || result.stdout}`,
+    );
   }
   return result.stdout;
 }
 
 export function runFixture(name: string, options: string[] = []): DeltaForgeReport {
-  return JSON.parse(runCli(["run", join("tests", "fixtures", name), ...options])) as DeltaForgeReport;
+  return JSON.parse(
+    runCli(["run", join("tests", "fixtures", name), ...options]),
+  ) as DeltaForgeReport;
 }
 
 export function runScenario(name: string, options: string[] = []): DeltaForgeReport {

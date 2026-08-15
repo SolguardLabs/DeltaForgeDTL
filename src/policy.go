@@ -221,12 +221,12 @@ func PolicySummary(policy Policy) map[string]string {
 func AssetPolicySummary(policy Policy, asset Asset) map[string]string {
 	resolved := policy.AssetPolicy(asset)
 	return map[string]string{
-		"asset":            resolved.Asset,
-		"microTolerance":   fmt.Sprintf("%d", resolved.MicroTolerance),
-		"globalTolerance":  fmt.Sprintf("%d", resolved.GlobalTolerance),
-		"settlementFloor":  fmt.Sprintf("%d", resolved.SettlementFloor),
-		"receiverCap":      fmt.Sprintf("%d", resolved.ReceiverCap),
-		"haircutBps":       fmt.Sprintf("%d", resolved.LiquidationHaircutBps),
-		"enabled":          fmt.Sprintf("%t", resolved.Enabled),
+		"asset":           resolved.Asset,
+		"microTolerance":  fmt.Sprintf("%d", resolved.MicroTolerance),
+		"globalTolerance": fmt.Sprintf("%d", resolved.GlobalTolerance),
+		"settlementFloor": fmt.Sprintf("%d", resolved.SettlementFloor),
+		"receiverCap":     fmt.Sprintf("%d", resolved.ReceiverCap),
+		"haircutBps":      fmt.Sprintf("%d", resolved.LiquidationHaircutBps),
+		"enabled":         fmt.Sprintf("%t", resolved.Enabled),
 	}
 }
