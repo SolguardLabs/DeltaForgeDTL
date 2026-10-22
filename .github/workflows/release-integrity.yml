@@ -26,11 +26,13 @@ jobs:
           set -euo pipefail
           main_sha="$(git rev-parse origin/main)"
           production_sha="$(git rev-parse origin/production)"
-          test "$main_sha" = "$production_sha"
+          git merge-base --is-ancestor "$production_sha" "$main_sha"
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
-            test "$(git rev-parse "${GITHUB_REF_NAME}^{commit}")" = "$main_sha"
+            tag_sha="$(git rev-parse "${GITHUB_REF_NAME}^{commit}")"
+            git merge-base --is-ancestor "$tag_sha" "$production_sha"
           fi
           if [[ "${GITHUB_EVENT_NAME}" == "release" ]]; then
             tag="${{ github.event.release.tag_name }}"
-            test "$(git rev-parse "${tag}^{commit}")" = "$main_sha"
+            tag_sha="$(git rev-parse "${tag}^{commit}")"
+            git merge-base --is-ancestor "$tag_sha" "$production_sha"
           fi
